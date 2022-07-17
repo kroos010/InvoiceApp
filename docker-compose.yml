@@ -14,8 +14,6 @@ services:
       - .:/app
     networks:
       - mynetwork
-    logging:
-      driver: none
 
   frontend:
     build:
@@ -27,6 +25,8 @@ services:
       - .:/app
     networks:
       mynetwork:
+
+
   db:
     image: postgres
     restart: always
@@ -39,8 +39,7 @@ services:
       POSTGRES_PASSWORD: postgres
     networks:
       mynetwork:
-        logging:
-          driver: none
+
 
   adminer:
     image: adminer
