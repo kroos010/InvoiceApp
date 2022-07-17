@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 
+ENV DOTNET_USE_POLLING_FILE_WATCHER 1
+
 RUN apt-get update && \
     apt-get install -qq -y
 
@@ -12,4 +14,6 @@ RUN dotnet dev-certs https -t
 
 WORKDIR /app/InvoiceApp/InvoiceApp.API
 
-ENTRYPOINT ["dotnet", "watch", "run"]
+RUN curl -sSL https://aka.ms/getvsdbgsh | /bin/sh /dev/stdin -v latest -l ~/vsdbg
+
+ENTRYPOINT ["dotnet", "watch", "run", "--no-hot-reload"]
