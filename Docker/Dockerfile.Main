@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+
+RUN apt-get update && \
+    apt-get install -qq -y
+
+WORKDIR /app
+COPY . .
+WORKDIR /app/InvoiceApp
+
+RUN dotnet restore
+RUN dotnet dev-certs https -t
+
+WORKDIR /app/InvoiceApp/InvoiceApp.API
+
+ENTRYPOINT ["dotnet", "watch", "run"]

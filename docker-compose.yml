@@ -1,0 +1,60 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile.Main
+    ports:
+      - "7178:7178"
+      - "5164:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:7178;http://+:5164
+    volumes:
+      - .:/app
+    networks:
+      - mynetwork
+    logging:
+      driver: none
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile.Frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+    networks:
+      mynetwork:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      # POSTGRES_HOST_AUTH_METHOD: trust
+      # POSTGRES_DB: databasename
+      # POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      mynetwork:
+        logging:
+          driver: none
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    links:
+      - db:db
+    networks:
+      mynetwork:
+
+
+networks:
+  mynetwork:
+    driver: bridge
