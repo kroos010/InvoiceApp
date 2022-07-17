@@ -45,10 +45,20 @@
                 <div class="mb-4">
                   <input formControlName="name" type="text" class="form-control form-control-lg form-control-alt"
                     id="login-username" placeholder="Username">
+
+                  <div class="invalid-feedback" style="display: block"
+                    *ngIf="(loginFormControl['name'].touched || submitted) && loginFormControl['name'].errors?.['required']">
+                    Name is required
+                  </div>
                 </div>
                 <div class="mb-4">
                   <input formControlName="password" type="password"
                     class="form-control form-control-lg form-control-alt" id="login-password" placeholder="Password">
+
+                  <div class="invalid-feedback" style="display: block"
+                    *ngIf="(loginFormControl['password'].touched || submitted) && loginFormControl['password'].errors?.['required']">
+                    Name is required
+                  </div>
                 </div>
               </div>
               <div class="mb-4">

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,18 +10,32 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  submitted: boolean;
   invalidLogin: boolean;
+  loginForm!: FormGroup;
 
-  loginForm = this.formBuilder.group({
-    name: '',
-    password: ''
-  });
+
+  // this.loginForm = FormGroup({
+
+  //   name: new FormControl(this.loginForm.name, [
+  //     Validators.required,
+  //   ]),
+
+
+  //   // name: '',
+  //   // password: ''
+  // });
 
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient) {
+    this.submitted = false;
     this.invalidLogin = false;
   }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      password: ['', [Validators.required]],
+    });
   }
 
   onSubmit() {
@@ -43,7 +57,10 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
     })
 
-
+    this.submitted = true;
   }
 
+  get loginFormControl() {
+    return this.loginForm.controls;
+  }
 }
