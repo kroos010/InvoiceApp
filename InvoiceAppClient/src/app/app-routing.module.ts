@@ -11,11 +11,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/',
         pathMatch: 'full'
       },
       {
-        'path': 'dashboard',
+        'path': '',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
