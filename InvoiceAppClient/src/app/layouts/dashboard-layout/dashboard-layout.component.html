@@ -1,2065 +1,255 @@
-<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
-    <!-- Side Overlay-->
-    <aside id="side-overlay">
-      <!-- Side Header -->
-      <div class="bg-image" style="background-image: url('assets/media/various/bg_side_overlay_header.jpg');">
-        <div class="bg-primary-op">
-          <div class="content-header">
-            <!-- User Avatar -->
-            <a class="img-link me-1" href="be_pages_generic_profile.html">
-              <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar10.jpg" alt="">
-            </a>
-            <!-- END User Avatar -->
+<div id="page-container" class="flex flex-col mx-auto w-full min-h-screen bg-gray-100 lg:pl-64">
+  <!-- Page Sidebar -->
+  <!--
+    Sidebar on Mobile
+      Closed '-translate-x-full'
+      Opened 'translate-x-0'
 
-            <!-- User Info -->
-            <div class="ms-2">
-              <a class="text-white fw-semibold" href="be_pages_generic_profile.html">George Taylor</a>
-              <div class="text-white-75 fs-sm">Full Stack Developer</div>
-            </div>
-            <!-- END User Info -->
+    Sidebar on Desktop
+      Closed 'lg:-translate-x-full'
+      Opened 'lg:translate-x-0'
+  -->
+  <nav [ngClass]="{'-translate-x-full': !showMenuNavbar, 'translate-x-0': showMenuNavbar}" id="page-sidebar" class="flex flex-col fixed top-0 left-0 bottom-0 w-full lg:w-64 h-full bg-gray-800 text-gray-200 z-50 transform transition-transform duration-500 ease-out -translate-x-full lg:translate-x-0" aria-label="Main Sidebar Navigation">
+    <!-- Sidebar Header -->
+    <div class="h-16 bg-gray-600 bg-opacity-25 flex-none flex items-center justify-between lg:justify-center px-4 w-full">
+      <!-- Brand -->  
+      <a href="javascript:void(0)" class="inline-flex items-center space-x-2 font-bold text-lg tracking-wide text-white hover:opacity-75">
+        <svg class="hi-solid hi-cube-transparent inline-block w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd"/></svg>
+        <span>Company</span>
+      </a>
+      <!-- END Brand -->
 
-            <!-- Close Side Overlay -->
-            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-            <a class="ms-auto text-white" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_close">
-              <i class="fa fa-times-circle"></i>
-            </a>
-            <!-- END Close Side Overlay -->
-          </div>
-        </div>
+      <!-- Close Sidebar on Mobile -->
+      <div class="lg:hidden">
+        <button (click)="toggleNavbar()" type="button" class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-3 py-2 leading-5 text-sm rounded border-transparent text-white opacity-75 hover:opacity-100 focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:opacity-75">
+          <svg class="hi-solid hi-x inline-block w-4 h-4 -mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
       </div>
-      <!-- END Side Header -->
+      <!-- END Close Sidebar on Mobile -->
+    </div>
+    <!-- END Sidebar Header -->
 
-      <!-- Side Content -->
-      <div class="content-side">
-        <!-- Side Overlay Tabs -->
-        <div class="block block-transparent pull-x pull-t mb-0">
-          <ul class="nav nav-tabs nav-tabs-block nav-justified" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="so-settings-tab" data-bs-toggle="tab" data-bs-target="#so-settings" role="tab" aria-controls="so-settings" aria-selected="true">
-                <i class="fa fa-fw fa-cog"></i>
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="so-people-tab" data-bs-toggle="tab" data-bs-target="#so-people" role="tab" aria-controls="so-people" aria-selected="false">
-                <i class="far fa-fw fa-user-circle"></i>
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="so-profile-tab" data-bs-toggle="tab" data-bs-target="#so-profile" role="tab" aria-controls="so-profile" aria-selected="false">
-                <i class="far fa-fw fa-edit"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="block-content tab-content overflow-hidden">
-            <!-- Settings Tab -->
-            <div class="tab-pane pull-x fade fade-up show active" id="so-settings" role="tabpanel" aria-labelledby="so-settings-tab">
-              <div class="block mb-0">
-                <!-- Color Themes -->
-                <!-- Toggle Themes functionality initialized in Template._uiHandleTheme() -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Color Themes</span>
-                </div>
-                <div class="block-content block-content-full">
-                  <div class="row g-sm text-center">
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-default" data-toggle="theme" data-theme="default" href="#">
-                        Default
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xwork" data-toggle="theme" data-theme="assets/css/themes/xwork.min.css" href="#">
-                        xWork
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xmodern" data-toggle="theme" data-theme="assets/css/themes/xmodern.min.css" href="#">
-                        xModern
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xeco" data-toggle="theme" data-theme="assets/css/themes/xeco.min.css" href="#">
-                        xEco
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xsmooth" data-toggle="theme" data-theme="assets/css/themes/xsmooth.min.css" href="#">
-                        xSmooth
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xinspire" data-toggle="theme" data-theme="assets/css/themes/xinspire.min.css" href="#">
-                        xInspire
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xdream" data-toggle="theme" data-theme="assets/css/themes/xdream.min.css" href="#">
-                        xDream
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xpro" data-toggle="theme" data-theme="assets/css/themes/xpro.min.css" href="#">
-                        xPro
-                      </a>
-                    </div>
-                    <div class="col-4 mb-1">
-                      <a class="d-block py-3 text-white fs-sm fw-semibold bg-xplay" data-toggle="theme" data-theme="assets/css/themes/xplay.min.css" href="#">
-                        xPlay
-                      </a>
-                    </div>
-                    <div class="col-12">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" href="be_ui_color_themes.html">All Color Themes</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- END Color Themes -->
-
-                <!-- Sidebar -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Sidebar</span>
-                </div>
-                <div class="block-content block-content-full">
-                  <div class="row g-sm text-center">
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="sidebar_style_dark" href="javascript:void(0)">Dark</a>
-                    </div>
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="sidebar_style_light" href="javascript:void(0)">Light</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- END Sidebar -->
-
-                <!-- Header -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Header</span>
-                </div>
-                <div class="block-content block-content-full">
-                  <div class="row g-sm text-center mb-2">
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="header_style_dark" href="javascript:void(0)">Dark</a>
-                    </div>
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="header_style_light" href="javascript:void(0)">Light</a>
-                    </div>
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="header_mode_fixed" href="javascript:void(0)">Fixed</a>
-                    </div>
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="header_mode_static" href="javascript:void(0)">Static</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- END Header -->
-
-                <!-- Content -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Content</span>
-                </div>
-                <div class="block-content block-content-full">
-                  <div class="row g-sm text-center">
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="content_layout_boxed" href="javascript:void(0)">Boxed</a>
-                    </div>
-                    <div class="col-6 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="content_layout_narrow" href="javascript:void(0)">Narrow</a>
-                    </div>
-                    <div class="col-12 mb-1">
-                      <a class="d-block py-3 bg-body-dark fw-semibold text-dark" data-toggle="layout" data-action="content_layout_full_width" href="javascript:void(0)">Full Width</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- END Content -->
-
-                <!-- Layout API -->
-                <div class="block-content block-content-full border-top">
-                  <a class="btn w-100 btn-alt-primary" href="be_layout_api.html">
-                    <i class="fa fa-fw fa-flask me-1"></i> Layout API
-                  </a>
-                </div>
-                <!-- END Layout API -->
-              </div>
-            </div>
-            <!-- END Settings Tab -->
-
-            <!-- People -->
-            <div class="tab-pane pull-x fade fade-up" id="so-people" role="tabpanel" aria-labelledby="so-people-tab">
-              <div class="block mb-0">
-                <!-- Online -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Online</span>
-                </div>
-                <div class="block-content">
-                  <ul class="nav-items">
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar7.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Susan Day</div>
-                          <div class="fs-sm text-muted">Photographer</div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar9.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Ryan Flores</div>
-                          <div class="fw-normal fs-sm text-muted">Web Designer</div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar2.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Helen Jacobs</div>
-                          <div class="fw-normal fs-sm text-muted">Web Developer</div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- Online -->
-
-                <!-- Busy -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Busy</span>
-                </div>
-                <div class="block-content">
-                  <ul class="nav-items">
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar6.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-danger"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Lori Moore</div>
-                          <div class="fw-normal fs-sm text-muted">UI Designer</div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- END Busy -->
-
-                <!-- Away -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Away</span>
-                </div>
-                <div class="block-content">
-                  <ul class="nav-items">
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar16.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Brian Cruz</div>
-                          <div class="fw-normal fs-sm text-muted">Copywriter</div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar4.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Amanda Powell</div>
-                          <div class="fw-normal fs-sm text-muted">Writer</div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- END Away -->
-
-                <!-- Offline -->
-                <div class="block-content block-content-sm block-content-full bg-body">
-                  <span class="text-uppercase fs-sm fw-bold">Offline</span>
-                </div>
-                <div class="block-content">
-                  <ul class="nav-items">
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar15.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Ryan Flores</div>
-                          <div class="fw-normal fs-sm text-muted">Teacher</div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar6.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Amber Harvey</div>
-                          <div class="fw-normal fs-sm text-muted">Photographer</div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar5.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Danielle Jones</div>
-                          <div class="fw-normal fs-sm text-muted">Front-end Developer</div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex py-2" href="be_pages_generic_profile.html">
-                        <div class="flex-shrink-0 mx-3 overlay-container">
-                          <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar16.jpg" alt="">
-                          <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>
-                        </div>
-                        <div class="flex-grow-1">
-                          <div class="fw-semibold">Henry Harrison</div>
-                          <div class="fw-normal fs-sm text-muted">UX Specialist</div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- END Offline -->
-
-                <!-- Add People -->
-                <div class="block-content block-content-full border-top">
-                  <a class="btn w-100 btn-alt-primary" href="javascript:void(0)">
-                    <i class="fa fa-fw fa-plus me-1 opacity-50"></i> Add People
-                  </a>
-                </div>
-                <!-- END Add People -->
-              </div>
-            </div>
-            <!-- END People -->
-
-            <!-- Profile -->
-            <div class="tab-pane pull-x fade fade-up" id="so-profile" role="tabpanel" aria-labelledby="so-profile-tab">
-              <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
-                <div class="block mb-0">
-                  <!-- Personal -->
-                  <div class="block-content block-content-sm block-content-full bg-body">
-                    <span class="text-uppercase fs-sm fw-bold">Personal</span>
-                  </div>
-                  <div class="block-content block-content-full">
-                    <div class="mb-4">
-                      <label class="form-label">Username</label>
-                      <input type="text" readonly class="form-control" id="so-profile-username-static" value="Admin">
-                    </div>
-                    <div class="mb-4">
-                      <label class="form-label" for="so-profile-name">Name</label>
-                      <input type="text" class="form-control" id="so-profile-name" name="so-profile-name" value="George Taylor">
-                    </div>
-                    <div class="mb-4">
-                      <label class="form-label" for="so-profile-email">Email</label>
-                      <input type="email" class="form-control" id="so-profile-email" name="so-profile-email" value="g.taylor@example.com">
-                    </div>
-                  </div>
-                  <!-- END Personal -->
-
-                  <!-- Password Update -->
-                  <div class="block-content block-content-sm block-content-full bg-body">
-                    <span class="text-uppercase fs-sm fw-bold">Password Update</span>
-                  </div>
-                  <div class="block-content block-content-full">
-                    <div class="mb-4">
-                      <label class="form-label" for="so-profile-password">Current Password</label>
-                      <input type="password" class="form-control" id="so-profile-password" name="so-profile-password">
-                    </div>
-                    <div class="mb-4">
-                      <label class="form-label" for="so-profile-new-password">New Password</label>
-                      <input type="password" class="form-control" id="so-profile-new-password" name="so-profile-new-password">
-                    </div>
-                    <div class="mb-4">
-                      <label class="form-label" for="so-profile-new-password-confirm">Confirm New Password</label>
-                      <input type="password" class="form-control" id="so-profile-new-password-confirm" name="so-profile-new-password-confirm">
-                    </div>
-                  </div>
-                  <!-- END Password Update -->
-
-                  <!-- Options -->
-                  <div class="block-content block-content-sm block-content-full bg-body">
-                    <span class="text-uppercase fs-sm fw-bold">Options</span>
-                  </div>
-                  <div class="block-content">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="so-settings-status" name="so-settings-status">
-                      <label class="form-check-label fw-semibold" for="so-settings-status">Online Status</label>
-                    </div>
-                    <p class="text-muted fs-sm">
-                      Make your online status visible to other users of your app
-                    </p>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="so-settings-notifications" name="so-settings-notifications">
-                      <label class="form-check-label fw-semibold" for="so-settings-notifications">Notifications</label>
-                    </div>
-                    <p class="text-muted fs-sm">
-                      Receive desktop notifications regarding your projects and sales
-                    </p>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="so-settings-updates" name="so-settings-updates">
-                      <label class="form-check-label fw-semibold" for="so-settings-updates">Auto Updates</label>
-                    </div>
-                    <p class="text-muted fs-sm">
-                      If enabled, we will keep all your applications and servers up to date with the most recent features automatically
-                    </p>
-                  </div>
-                  <!-- END Options -->
-
-                  <!-- Submit -->
-                  <div class="block-content block-content-full border-top">
-                    <button type="submit" class="btn w-100 btn-alt-primary">
-                      <i class="fa fa-fw fa-save me-1 opacity-50"></i> Save
-                    </button>
-                  </div>
-                  <!-- END Submit -->
-                </div>
-              </form>
-            </div>
-            <!-- END Profile -->
-          </div>
-        </div>
-        <!-- END Side Overlay Tabs -->
-      </div>
-      <!-- END Side Content -->
-    </aside>
-    <!-- END Side Overlay -->
-
-    <!-- Sidebar -->
-    <!--
-      Sidebar Mini Mode - Display Helper classes
-
-      Adding 'smini-hide' class to an element will make it invisible (opacity: 0) when the sidebar is in mini mode
-      Adding 'smini-show' class to an element will make it visible (opacity: 1) when the sidebar is in mini mode
-        If you would like to disable the transition animation, make sure to also add the 'no-transition' class to your element
-
-      Adding 'smini-hidden' to an element will hide it when the sidebar is in mini mode
-      Adding 'smini-visible' to an element will show it (display: inline-block) only when the sidebar is in mini mode
-      Adding 'smini-visible-block' to an element will show it (display: block) only when the sidebar is in mini mode
-    -->
-    <nav id="sidebar" aria-label="Main Navigation">
-      <!-- Side Header -->
-      <div class="bg-header-dark">
-        <div class="content-header bg-white-5">
-          <!-- Logo -->
-          <a class="fw-semibold text-white tracking-wide" href="index.html">
-            <span class="smini-visible">
-              D<span class="opacity-75">x</span>
+    <!-- Sidebar Navigation -->
+    <div class="overflow-y-auto">
+      <div class="p-4 w-full">
+        <nav class="space-y-1">
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-50 bg-gray-700 bg-opacity-60">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-home inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             </span>
-            <span class="smini-hidden">
-              Dash<span class="opacity-75">mix</span>
-            </span>
+            <span class="py-2 grow">Dashboard</span>
+            <span class="px-2 py-1 rounded-full text-xs font-medium leading-4 bg-opacity-10 text-gray-100 bg-gray-400">3</span>
           </a>
-          <!-- END Logo -->
-
-          <!-- Options -->
-          <div>
-            <!-- Toggle Sidebar Style -->
-            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-            <!-- Class Toggle, functionality initialized in Helpers.dmToggleClass() -->
-            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#sidebar-style-toggler" data-class="fa-toggle-off fa-toggle-on" onclick="Dashmix.layout('sidebar_style_toggle');Dashmix.layout('header_style_toggle');">
-              <i class="fa fa-toggle-off" id="sidebar-style-toggler"></i>
-            </button>
-            <!-- END Toggle Sidebar Style -->
-
-            <!-- Dark Mode -->
-            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#dark-mode-toggler" data-class="far fa" onclick="Dashmix.layout('dark_mode_toggle');">
-              <i class="far fa-moon" id="dark-mode-toggler"></i>
-            </button>
-            <!-- END Dark Mode -->
-
-            <!-- Close Sidebar, Visible only on mobile screens -->
-            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-            <button type="button" class="btn btn-sm btn-alt-secondary d-lg-none" data-toggle="layout" data-action="sidebar_close">
-              <i class="fa fa-times-circle"></i>
-            </button>
-            <!-- END Close Sidebar -->
-          </div>
-          <!-- END Options -->
-        </div>
+          <div class="px-3 pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-gray-400">Projects</div>
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-300 hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-view-grid inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            </span>
+            <span class="py-2 grow">Manage</span>
+            <span class="px-2 py-1 rounded-full text-xs font-medium leading-4 bg-opacity-10 text-gray-100 bg-gray-400">99+</span>
+          </a>
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-300 hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-clipboard-list inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+            </span>
+            <span class="py-2 grow">Tasks</span>
+            <span class="px-2 py-1 rounded-full text-xs font-medium leading-4 bg-opacity-10 text-gray-100 bg-gray-400">9</span>
+          </a>
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-300 hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-users inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </span>
+            <span class="py-2 grow">Clients</span>
+            <span class="px-2 py-1 rounded-full text-xs font-medium leading-4 bg-opacity-10 text-gray-100 bg-gray-400">26</span>
+          </a>
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-300 hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-plus-circle inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </span>
+            <span class="py-2 grow">Add New</span>
+          </a>
+          <div class="px-3 pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-gray-400">Account</div>
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-300 hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-user inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            </span>
+            <span class="py-2 grow">Profile</span>
+          </a>
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-300 hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-cog inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </span>
+            <span class="py-2 grow">Settings</span>
+          </a>
+          <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 font-medium rounded text-gray-300 hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40">
+            <span class="flex-none flex items-center opacity-50">
+              <svg class="hi-outline hi-lock-open inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+            </span>
+            <span class="py-2 grow">Log out</span>
+          </a>
+        </nav>
       </div>
-      <!-- END Side Header -->
+    </div>
+    <!-- END Sidebar Navigation -->
+  </nav>
+  <!-- Page Sidebar -->
 
-      <!-- Sidebar Scrolling -->
-      <div class="js-sidebar-scroll">
-        <!-- Side Navigation -->
-        <div class="content-side">
-          <ul class="nav-main">
-            <li class="nav-main-item">
-              <a class="nav-main-link active" href="be_pages_dashboard.html">
-                <i class="nav-main-link-icon fa fa-location-arrow"></i>
-                <span class="nav-main-link-name">Dashboard</span>
-                <span class="nav-main-link-badge badge rounded-pill bg-primary">8</span>
-              </a>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-clone"></i>
-                <span class="nav-main-link-name">Page Kits</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Generic</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_blank.html">
-                        <span class="nav-main-link-name">Blank</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_blank_block.html">
-                        <span class="nav-main-link-name">Blank (Block)</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_search.html">
-                        <span class="nav-main-link-name">Search</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_profile.html">
-                        <span class="nav-main-link-name">Profile</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_profile_edit.html">
-                        <span class="nav-main-link-name">Profile Edit</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_inbox.html">
-                        <span class="nav-main-link-name">Inbox</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_invoice.html">
-                        <span class="nav-main-link-name">Invoice</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_faq.html">
-                        <span class="nav-main-link-name">FAQ</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_generic_upgrade_plan.html">
-                        <span class="nav-main-link-name">Upgrade Plan</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_sidebar_mini_nav.html">
-                        <span class="nav-main-link-name">Sidebar with mini nav</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">e-Commerce</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_ecom_dashboard.html">
-                        <span class="nav-main-link-name">Dashboard</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_ecom_orders.html">
-                        <span class="nav-main-link-name">Orders</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_ecom_order.html">
-                        <span class="nav-main-link-name">Order</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_ecom_products.html">
-                        <span class="nav-main-link-name">Products</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_ecom_product_edit.html">
-                        <span class="nav-main-link-name">Product Edit</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_ecom_customer.html">
-                        <span class="nav-main-link-name">Customer</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Projects</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_projects_dashboard.html">
-                        <span class="nav-main-link-name">Dashboard</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_projects_tasks.html">
-                        <span class="nav-main-link-name">Project Tasks</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_projects_create.html">
-                        <span class="nav-main-link-name">Create</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_projects_edit.html">
-                        <span class="nav-main-link-name">Edit</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Jobs</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_jobs_dashboard.html">
-                        <span class="nav-main-link-name">Dashboard</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_jobs_listing.html">
-                        <span class="nav-main-link-name">Listing</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_jobs_apply.html">
-                        <span class="nav-main-link-name">Apply</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_jobs_post.html">
-                        <span class="nav-main-link-name">Post</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Education</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_education_dashboard.html">
-                        <span class="nav-main-link-name">Dashboard</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_education_course.html">
-                        <span class="nav-main-link-name">Course</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_education_authors.html">
-                        <span class="nav-main-link-name">Authors</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Forum</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_forum_categories.html">
-                        <span class="nav-main-link-name">Categories</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_forum_topics.html">
-                        <span class="nav-main-link-name">Topics</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_forum_discussion.html">
-                        <span class="nav-main-link-name">Discussion</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Blog</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_classic.html">
-                        <span class="nav-main-link-name">Classic</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_list.html">
-                        <span class="nav-main-link-name">List</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_grid.html">
-                        <span class="nav-main-link-name">Grid</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_story.html">
-                        <span class="nav-main-link-name">Story</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_story_cover.html">
-                        <span class="nav-main-link-name">Story Cover</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_post_manage.html">
-                        <span class="nav-main-link-name">Manage Posts</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_post_add.html">
-                        <span class="nav-main-link-name">Add Post</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_pages_blog_post_edit.html">
-                        <span class="nav-main-link-name">Edit Post</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Boxed Backend</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_dashboard.html">
-                        <span class="nav-main-link-name">Dashboard</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_search.html">
-                        <span class="nav-main-link-name">Search</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_simple_1.html">
-                        <span class="nav-main-link-name">Simple 1</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_simple_2.html">
-                        <span class="nav-main-link-name">Simple 2</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_image_1.html">
-                        <span class="nav-main-link-name">Image 1</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_image_2.html">
-                        <span class="nav-main-link-name">Image 2</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_video_1.html">
-                        <span class="nav-main-link-name">Video 1</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="bd_video_2.html">
-                        <span class="nav-main-link-name">Video 2</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Special</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="op_checkout.html">
-                        <span class="nav-main-link-name">Checkout</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="op_maintenance.html">
-                        <span class="nav-main-link-name">Maintenance</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="op_status.html">
-                        <span class="nav-main-link-name">Status</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="op_installation.html">
-                        <span class="nav-main-link-name">Installation</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="op_coming_soon.html">
-                        <span class="nav-main-link-name">Coming Soon</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="op_coming_soon_2.html">
-                        <span class="nav-main-link-name">Coming Soon 2</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-heading">Base</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-border-all"></i>
-                <span class="nav-main-link-name">Blocks</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_blocks_styles.html">
-                    <span class="nav-main-link-name">Styles</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_blocks_options.html">
-                    <span class="nav-main-link-name">Options</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_blocks_forms.html">
-                    <span class="nav-main-link-name">Forms</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_blocks_themed.html">
-                    <span class="nav-main-link-name">Themed</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_blocks_api.html">
-                    <span class="nav-main-link-name">API</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-boxes"></i>
-                <span class="nav-main-link-name">Widgets</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_widgets_tiles.html">
-                    <span class="nav-main-link-name">Tiles</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_widgets_stats.html">
-                    <span class="nav-main-link-name">Statistics</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_widgets_media.html">
-                    <span class="nav-main-link-name">Media</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_widgets_users.html">
-                    <span class="nav-main-link-name">Users</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_widgets_blog.html">
-                    <span class="nav-main-link-name">Blog</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_widgets_various.html">
-                    <span class="nav-main-link-name">Various</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-vector-square"></i>
-                <span class="nav-main-link-name">Layout</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Page</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_page_default.html">
-                        <span class="nav-main-link-name">Default</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_page_flipped.html">
-                        <span class="nav-main-link-name">Flipped</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_page_native_scrolling.html">
-                        <span class="nav-main-link-name">Native Scrolling</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Main Content</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_content_main_full_width.html">
-                        <span class="nav-main-link-name">Full Width</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_content_main_narrow.html">
-                        <span class="nav-main-link-name">Narrow</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_content_main_boxed.html">
-                        <span class="nav-main-link-name">Boxed</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Side Content</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_content_side_left.html">
-                        <span class="nav-main-link-name">Left</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_content_side_right.html">
-                        <span class="nav-main-link-name">Right</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Hero</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span class="nav-main-link-name">Color</span>
-                      </a>
-                      <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_hero_color_dark.html">
-                            <span class="nav-main-link-name">Dark</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_hero_color_light.html">
-                            <span class="nav-main-link-name">Light</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span class="nav-main-link-name">Image</span>
-                      </a>
-                      <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_hero_image_dark.html">
-                            <span class="nav-main-link-name">Dark</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_hero_image_light.html">
-                            <span class="nav-main-link-name">Light</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span class="nav-main-link-name">Video</span>
-                      </a>
-                      <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_hero_video_dark.html">
-                            <span class="nav-main-link-name">Dark</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_hero_video_light.html">
-                            <span class="nav-main-link-name">Light</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Header</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span class="nav-main-link-name">Fixed</span>
-                      </a>
-                      <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_fixed_light.html">
-                            <span class="nav-main-link-name">Light</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_fixed_light_glass.html">
-                            <span class="nav-main-link-name">Light Glass</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_fixed_dark.html">
-                            <span class="nav-main-link-name">Dark</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_fixed_dark_glass.html">
-                            <span class="nav-main-link-name">Dark Glass</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span class="nav-main-link-name">Static</span>
-                      </a>
-                      <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_static_light.html">
-                            <span class="nav-main-link-name">Light</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_static_light_glass.html">
-                            <span class="nav-main-link-name">Light Glass</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_static_dark.html">
-                            <span class="nav-main-link-name">Dark</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="be_layout_header_static_dark_glass.html">
-                            <span class="nav-main-link-name">Dark Glass</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Footer</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_footer_static.html">
-                        <span class="nav-main-link-name">Static</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_footer_fixed.html">
-                        <span class="nav-main-link-name">Fixed</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Sidebar</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_sidebar_mini.html">
-                        <span class="nav-main-link-name">Mini</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_sidebar_light.html">
-                        <span class="nav-main-link-name">Light</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_sidebar_dark.html">
-                        <span class="nav-main-link-name">Dark</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_sidebar_hidden.html">
-                        <span class="nav-main-link-name">Hidden</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Side Overlay</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_side_overlay_visible.html">
-                        <span class="nav-main-link-name">Visible</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_side_overlay_mode_hover.html">
-                        <span class="nav-main-link-name">Hover Mode</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_layout_side_overlay_no_page_overlay.html">
-                        <span class="nav-main-link-name">No Page Overlay</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_layout_api.html">
-                    <span class="nav-main-link-name">API</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-heading">Interface</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-flask"></i>
-                <span class="nav-main-link-name">Elements</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_icons.html">
-                    <span class="nav-main-link-name">Icon Packs</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_grid.html">
-                    <span class="nav-main-link-name">Grid</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_typography.html">
-                    <span class="nav-main-link-name">Typography</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_navigation.html">
-                    <span class="nav-main-link-name">Navigation</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_navigation_horizontal.html">
-                    <span class="nav-main-link-name">Horizontal Nav</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_mega_menu.html">
-                    <span class="nav-main-link-name">Mega Menu</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_tabs.html">
-                    <span class="nav-main-link-name">Tabs</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_buttons.html">
-                    <span class="nav-main-link-name">Buttons</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_buttons_groups.html">
-                    <span class="nav-main-link-name">Button Groups</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_dropdowns.html">
-                    <span class="nav-main-link-name">Dropdowns</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_progress.html">
-                    <span class="nav-main-link-name">Progress</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_alerts.html">
-                    <span class="nav-main-link-name">Alerts</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_tooltips.html">
-                    <span class="nav-main-link-name">Tooltips</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_popovers.html">
-                    <span class="nav-main-link-name">Popovers</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_accordion.html">
-                    <span class="nav-main-link-name">Accordion</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_modals.html">
-                    <span class="nav-main-link-name">Modals</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_images.html">
-                    <span class="nav-main-link-name">Images Overlay</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_timeline.html">
-                    <span class="nav-main-link-name">Timeline</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_ribbons.html">
-                    <span class="nav-main-link-name">Ribbons</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_animations.html">
-                    <span class="nav-main-link-name">Animations</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_backgrounds.html">
-                    <span class="nav-main-link-name">Backgrounds</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_ui_color_themes.html">
-                    <span class="nav-main-link-name">Color Themes</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-grip-horizontal"></i>
-                <span class="nav-main-link-name">Tables</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_tables_styles.html">
-                    <span class="nav-main-link-name">Styles</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_tables_responsive.html">
-                    <span class="nav-main-link-name">Responsive</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_tables_helpers.html">
-                    <span class="nav-main-link-name">Helpers</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_tables_pricing.html">
-                    <span class="nav-main-link-name">Pricing</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_tables_datatables.html">
-                    <span class="nav-main-link-name">DataTables</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-sticky-note"></i>
-                <span class="nav-main-link-name">Forms</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_forms_elements.html">
-                    <span class="nav-main-link-name">Elements</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_forms_layouts.html">
-                    <span class="nav-main-link-name">Layouts</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_forms_input_groups.html">
-                    <span class="nav-main-link-name">Input Groups</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_forms_plugins.html">
-                    <span class="nav-main-link-name">Plugins</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_forms_editors.html">
-                    <span class="nav-main-link-name">Editors</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">CKEditor 5</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_forms_ckeditor5_classic.html">
-                        <span class="nav-main-link-name">Classic</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="be_forms_ckeditor5_inline.html">
-                        <span class="nav-main-link-name">Inline</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_forms_validation.html">
-                    <span class="nav-main-link-name">Validation</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-heading">Extend</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-wrench"></i>
-                <span class="nav-main-link-name">Components</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_chat.html">
-                    <span class="nav-main-link-name">Chat</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_onboarding.html">
-                    <span class="nav-main-link-name">Onboarding</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_nestable.html">
-                    <span class="nav-main-link-name">Nestable</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_dialogs.html">
-                    <span class="nav-main-link-name">Dialogs</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_notifications.html">
-                    <span class="nav-main-link-name">Notifications</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_loaders.html">
-                    <span class="nav-main-link-name">Loaders</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_charts.html">
-                    <span class="nav-main-link-name">Charts</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_gallery.html">
-                    <span class="nav-main-link-name">Gallery</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_sliders.html">
-                    <span class="nav-main-link-name">Sliders</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_carousel.html">
-                    <span class="nav-main-link-name">Carousel</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_rating.html">
-                    <span class="nav-main-link-name">Rating</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_appear.html">
-                    <span class="nav-main-link-name">Appear</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_calendar.html">
-                    <span class="nav-main-link-name">Calendar</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_image_cropper.html">
-                    <span class="nav-main-link-name">Image Cropper</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_maps_vector.html">
-                    <span class="nav-main-link-name">Vector Maps</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_comp_syntax_highlighting.html">
-                    <span class="nav-main-link-name">Syntax Highlighting</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-cog"></i>
-                <span class="nav-main-link-name">Main Menu</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="#">
-                    <i class="nav-main-link-icon fa fa-inbox"></i>
-                    <span class="nav-main-link-name">1.1 Item</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="#">
-                    <i class="nav-main-link-icon fa fa-fire"></i>
-                    <span class="nav-main-link-name">1.2 Item</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="#">
-                    <i class="nav-main-link-icon fa fa-share-alt"></i>
-                    <span class="nav-main-link-name">1.3 Item</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <span class="nav-main-link-name">Sub Level 2</span>
-                    <span class="nav-main-link-badge badge rounded-pill bg-primary">3</span>
-                  </a>
-                  <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="#">
-                        <i class="nav-main-link-icon fa fa-tag"></i>
-                        <span class="nav-main-link-name">2.1 Item</span>
-                        <span class="nav-main-link-badge badge rounded-pill bg-info">2</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="#">
-                        <i class="nav-main-link-icon fa fa-chart-pie"></i>
-                        <span class="nav-main-link-name">2.2 Item</span>
-                        <span class="nav-main-link-badge badge rounded-pill bg-danger">2</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link" href="#">
-                        <i class="nav-main-link-icon fa fa-sticky-note"></i>
-                        <span class="nav-main-link-name">2.3 Item</span>
-                        <span class="nav-main-link-badge badge rounded-pill bg-warning">3</span>
-                      </a>
-                    </li>
-                    <li class="nav-main-item">
-                      <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span class="nav-main-link-name">Sub Level 3</span>
-                      </a>
-                      <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="#">
-                            <i class="nav-main-link-icon fa fa-map"></i>
-                            <span class="nav-main-link-name">3.1 Item</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="#">
-                            <i class="nav-main-link-icon fa fa-coffee"></i>
-                            <span class="nav-main-link-name">3.2 Item</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link" href="#">
-                            <i class="nav-main-link-icon fa fa-user-astronaut"></i>
-                            <span class="nav-main-link-name">3.3 Item</span>
-                          </a>
-                        </li>
-                        <li class="nav-main-item">
-                          <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                            <span class="nav-main-link-name">Sub Level 4</span>
-                          </a>
-                          <ul class="nav-main-submenu">
-                            <li class="nav-main-item">
-                              <a class="nav-main-link" href="#">
-                                <i class="nav-main-link-icon fa fa-heart"></i>
-                                <span class="nav-main-link-name">4.1 Item</span>
-                              </a>
-                            </li>
-                            <li class="nav-main-item">
-                              <a class="nav-main-link" href="#">
-                                <i class="nav-main-link-icon fa fa-search"></i>
-                                <span class="nav-main-link-name">4.2 Item</span>
-                              </a>
-                            </li>
-                            <li class="nav-main-item">
-                              <a class="nav-main-link" href="#">
-                                <i class="nav-main-link-icon fa fa-microphone"></i>
-                                <span class="nav-main-link-name">4.3 Item</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-heading">Pages</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-rocket"></i>
-                <span class="nav-main-link-name">Dashboards</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_pages_dashboard_all.html">
-                    <span class="nav-main-link-name">All</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_pages_dashboard_v1.html">
-                    <span class="nav-main-link-name">Corporate v1</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_social.html">
-                    <span class="nav-main-link-name">Social</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_messages.html">
-                    <span class="nav-main-link-name">Messages</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_dark.html">
-                    <span class="nav-main-link-name">Dark</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_minimal.html">
-                    <span class="nav-main-link-name">Minimal</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_modern.html">
-                    <span class="nav-main-link-name">Modern</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_classic_boxed.html">
-                    <span class="nav-main-link-name">Classic Boxed</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_banking.html">
-                    <span class="nav-main-link-name">Banking</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_crypto.html">
-                    <span class="nav-main-link-name">Crypto</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_hosting.html">
-                    <span class="nav-main-link-name">Hosting</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_booking.html">
-                    <span class="nav-main-link-name">Booking</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_gaming.html">
-                    <span class="nav-main-link-name">Gaming</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_tasks.html">
-                    <span class="nav-main-link-name">Tasks</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_medical.html">
-                    <span class="nav-main-link-name">Medical</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_travel.html">
-                    <span class="nav-main-link-name">Travel</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_social_compact.html">
-                    <span class="nav-main-link-name">Social Compact</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_chat.html">
-                    <span class="nav-main-link-name">Chat</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_analytics.html">
-                    <span class="nav-main-link-name">Analytics</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_corporate_slim.html">
-                    <span class="nav-main-link-name">Corporate Slim</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_wp_post.html">
-                    <span class="nav-main-link-name">WP Post</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="db_file_hosting.html">
-                    <span class="nav-main-link-name">File Hosting</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-user-friends"></i>
-                <span class="nav-main-link-name">Auth</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_pages_auth_all.html">
-                    <span class="nav-main-link-name">All</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_signin.html">
-                    <span class="nav-main-link-name">Sign In</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_signin_box.html">
-                    <span class="nav-main-link-name">Sign In Box</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_signin_box_alt.html">
-                    <span class="nav-main-link-name">Sign In Box Alt</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_signup.html">
-                    <span class="nav-main-link-name">Sign Up</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_signup_box.html">
-                    <span class="nav-main-link-name">Sign Up Box</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_signup_box_alt.html">
-                    <span class="nav-main-link-name">Sign Up Box Alt</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_lock.html">
-                    <span class="nav-main-link-name">Lock Screen</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_lock_box.html">
-                    <span class="nav-main-link-name">Lock Screen Box</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_lock_box_alt.html">
-                    <span class="nav-main-link-name">Lock Screen Box Alt</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_reminder.html">
-                    <span class="nav-main-link-name">Pass Reminder</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_reminder_box.html">
-                    <span class="nav-main-link-name">Pass Reminder Box</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_auth_reminder_box_alt.html">
-                    <span class="nav-main-link-name">Pass Reminder Box Alt</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-ghost"></i>
-                <span class="nav-main-link-name">Error</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="be_pages_error_all.html">
-                    <span class="nav-main-link-name">All</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_error_400.html">
-                    <span class="nav-main-link-name">400</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_error_401.html">
-                    <span class="nav-main-link-name">401</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_error_403.html">
-                    <span class="nav-main-link-name">403</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_error_404.html">
-                    <span class="nav-main-link-name">404</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_error_500.html">
-                    <span class="nav-main-link-name">500</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="op_error_503.html">
-                    <span class="nav-main-link-name">503</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-main-item">
-              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon fa fa-coffee"></i>
-                <span class="nav-main-link-name">Get Started</span>
-              </a>
-              <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="gs_backend.html">
-                    <span class="nav-main-link-name">Backend</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="gs_backend_boxed.html">
-                    <span class="nav-main-link-name">Backend Boxed</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="gs_landing.html">
-                    <span class="nav-main-link-name">Landing</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="gs_rtl_backend.html">
-                    <span class="nav-main-link-name">RTL Backend</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="gs_rtl_backend_boxed.html">
-                    <span class="nav-main-link-name">RTL Backend Boxed</span>
-                  </a>
-                </li>
-                <li class="nav-main-item">
-                  <a class="nav-main-link" href="gs_rtl_landing.html">
-                    <span class="nav-main-link-name">RTL Landing</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+  <!-- Page Header -->
+  <!--
+    Sidebar on Desktop
+      Closed '' (no class)
+      Opened 'lg:pl-64'
+  -->
+  <header id="page-header" class="flex flex-none items-center h-16 bg-white shadow-sm fixed top-0 right-0 left-0 z-30 lg:pl-64">
+    <div class="flex justify-between max-w-10xl mx-auto px-4 lg:px-8 w-full">
+      <!-- Left Section -->
+      <div class="flex items-center space-x-2">
+        <!-- Toggle Sidebar on Desktop Todo: Remove?-->  
+        <!-- <div class="hidden lg:block">
+          <button type="button" class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-3 py-2 leading-6 rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
+            <svg class="hi-solid hi-menu-alt-1 inline-block w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+          </button>
+        </div> -->
+        <!-- END Toggle Sidebar on Desktop -->
+
+        <!-- Toggle Sidebar on Mobile -->
+        <div class="lg:hidden">
+          <button (click)="toggleNavbar()" type="button" class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-3 py-2 leading-6 rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
+            <svg class="hi-solid hi-menu-alt-1 inline-block w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+          </button>
         </div>
-        <!-- END Side Navigation -->
+        <!-- END Toggle Sidebar on Mobile -->
+
+        <!-- Search -->
+        <div class="hidden sm:block">
+          <form onsubmit="return false;">
+            <input type="text" class="w-full block border border-gray-200 rounded px-3 py-2 leading-5 text-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" id="search" name="search" placeholder="Search..">
+          </form>
+        </div>
+        <div class="sm:hidden">
+          <button type="button" class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-3 py-2 leading-5 text-sm rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
+            <svg class="hi-solid hi-search inline-block w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+          </button>
+        </div>
+        <!-- END Search -->
       </div>
-      <!-- END Sidebar Scrolling -->
-    </nav>
-    <!-- END Sidebar -->
-    <!-- Header -->
-    <header id="page-header">
-      <!-- Header Content -->
-      <div class="content-header">
-        <!-- Left Section -->
-        <div class="space-x-1">
-          <!-- Toggle Sidebar -->
-          <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
-          <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="sidebar_toggle">
-            <i class="fa fa-fw fa-bars"></i>
-          </button>
-          <!-- END Toggle Sidebar -->
+      <!-- END Left Section -->
 
-          <!-- Open Search Section -->
-          <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-          <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="header_search_on">
-            <i class="fa fa-fw opacity-50 fa-search"></i> <span class="ms-1 d-none d-sm-inline-block">Search</span>
-          </button>
-          <!-- END Open Search Section -->
-        </div>
-        <!-- END Left Section -->
+      <!-- Right Section -->
+      <div class="flex items-center space-x-2">
+        <!-- Notifications -->
+        <button type="button" class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-3 py-2 leading-5 text-sm rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
+          <svg class="hi-outline hi-bell inline-block w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <span class="text-indigo-500">•</span>
+        </button>
+        <!-- END Notifications -->
 
-        <!-- Right Section -->
-        <div class="space-x-1">
-          <!-- User Dropdown -->
-          <div class="dropdown d-inline-block">
-            <button type="button" class="btn btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-fw fa-user d-sm-none"></i>
-              <span class="d-none d-sm-inline-block">Admin</span>
-              <i class="fa fa-fw fa-angle-down opacity-50 ms-1 d-none d-sm-inline-block"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
-              <div class="bg-primary-dark rounded-top fw-semibold text-white text-center p-3">
-                User Options
+        <!-- User Dropdown -->
+        <div class="relative inline-block">
+          <!-- Dropdown Toggle Button -->
+          <button
+            (click)="toggleHeaderProfileDropdown()"
+            type="button"
+            class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-3 py-2 leading-5 text-sm rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none"
+            id="tk-dropdown-layouts-user"
+            aria-haspopup="true"
+            aria-expanded="true"
+          >
+            <span>Admin</span>
+            <svg class="hi-solid hi-chevron-down inline-block w-5 h-5 opacity-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </button>
+          <!-- END Dropdown Toggle Button -->
+
+          <!-- Dropdown -->
+          <!-- 
+            Visibility
+              Closed        'hidden'
+              Opened        '' (no class)
+
+            Show/Hide with transitions
+              enter         'transition ease-out duration-150'
+              enter-start   'transform opacity-0 scale-75'
+              enter-end     'transform opacity-100 scale-100'
+              leave         'transition ease-in duration-100'
+              leave-start   'transform opacity-100 scale-100'
+              leave-end     'transform opacity-0 scale-75'
+          -->
+          <div [ngClass]="{'hidden': !showHeaderProfileDropdown, '': showHeaderProfileDropdown}" role="menu" aria-labelledby="tk-dropdown-layouts-user" class="absolute right-0 origin-top-right mt-2 w-48 shadow-xl rounded z-1">
+            <div class="bg-white ring-1 ring-black ring-opacity-5 rounded divide-y divide-gray-100">
+              <div class="p-2 space-y-1">
+                <a role="menuitem" href="javascript:void(0)" class="flex items-center space-x-2 rounded py-2 px-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-700">
+                  <svg class="hi-solid hi-user-circle inline-block w-5 h-5 opacity-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/></svg>
+                  <span>Profile</span>
+                </a>
+                <a role="menuitem" href="javascript:void(0)" class="flex items-center space-x-2 rounded py-2 px-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-700">
+                  <svg class="hi-solid hi-inbox inline-block w-5 h-5 opacity-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z" clip-rule="evenodd"/></svg>
+                  <span>Inbox</span>
+                </a>
               </div>
-              <div class="p-2">
-                <a class="dropdown-item" href="be_pages_generic_profile.html">
-                  <i class="far fa-fw fa-user me-1"></i> Profile
+              <div class="p-2 space-y-1">
+                <a role="menuitem" href="javascript:void(0)" class="flex items-center space-x-2 rounded py-2 px-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-700">
+                  <svg class="hi-solid hi-cog inline-block w-5 h-5 opacity-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+                  <span>Settings</span>
                 </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_inbox.html">
-                  <span><i class="far fa-fw fa-envelope me-1"></i> Inbox</span>
-                  <span class="badge bg-primary rounded-pill">3</span>
-                </a>
-                <a class="dropdown-item" href="be_pages_generic_invoice.html">
-                  <i class="far fa-fw fa-file-alt me-1"></i> Invoices
-                </a>
-                <div role="separator" class="dropdown-divider"></div>
-
-                <!-- Toggle Side Overlay -->
-                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
-                  <i class="far fa-fw fa-building me-1"></i> Settings
-                </a>
-                <!-- END Side Overlay -->
-
-                <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item" href="op_auth_signin.html">
-                  <i class="far fa-fw fa-arrow-alt-circle-left me-1"></i> Sign Out
-                </a>
+              </div>
+              <div class="p-2 space-y-1">
+                <form onsubmit="return false;">
+                  <button type="submit" role="menuitem" class="w-full text-left flex items-center space-x-2 rounded py-2 px-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-700">
+                    <svg class="hi-solid hi-lock-closed inline-block w-5 h-5 opacity-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+                    <span>Sign out</span>
+                  </button>
+                </form>
               </div>
             </div>
           </div>
-          <!-- END User Dropdown -->
-
-          <!-- Notifications Dropdown -->
-          <div class="dropdown d-inline-block">
-            <button type="button" class="btn btn-alt-secondary" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-fw fa-bell"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
-              <div class="bg-primary-dark rounded-top fw-semibold text-white text-center p-3">
-                Notifications
-              </div>
-              <ul class="nav-items my-2">
-                <li>
-                  <a class="d-flex text-dark py-2" href="javascript:void(0)">
-                    <div class="flex-shrink-0 mx-3">
-                      <i class="fa fa-fw fa-check-circle text-success"></i>
-                    </div>
-                    <div class="flex-grow-1 fs-sm pe-2">
-                      <div class="fw-semibold">App was updated to v5.6!</div>
-                      <div class="text-muted">3 min ago</div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="d-flex text-dark py-2" href="javascript:void(0)">
-                    <div class="flex-shrink-0 mx-3">
-                      <i class="fa fa-fw fa-user-plus text-info"></i>
-                    </div>
-                    <div class="flex-grow-1 fs-sm pe-2">
-                      <div class="fw-semibold">New Subscriber was added! You now have 2580!</div>
-                      <div class="text-muted">10 min ago</div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="d-flex text-dark py-2" href="javascript:void(0)">
-                    <div class="flex-shrink-0 mx-3">
-                      <i class="fa fa-fw fa-times-circle text-danger"></i>
-                    </div>
-                    <div class="flex-grow-1 fs-sm pe-2">
-                      <div class="fw-semibold">Server backup failed to complete!</div>
-                      <div class="text-muted">30 min ago</div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="d-flex text-dark py-2" href="javascript:void(0)">
-                    <div class="flex-shrink-0 mx-3">
-                      <i class="fa fa-fw fa-exclamation-circle text-warning"></i>
-                    </div>
-                    <div class="flex-grow-1 fs-sm pe-2">
-                      <div class="fw-semibold">You are running out of space. Please consider upgrading your plan.</div>
-                      <div class="text-muted">1 hour ago</div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="d-flex text-dark py-2" href="javascript:void(0)">
-                    <div class="flex-shrink-0 mx-3">
-                      <i class="fa fa-fw fa-plus-circle text-primary"></i>
-                    </div>
-                    <div class="flex-grow-1 fs-sm pe-2">
-                      <div class="fw-semibold">New Sale! + $30</div>
-                      <div class="text-muted">2 hours ago</div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-              <div class="p-2 border-top">
-                <a class="btn btn-alt-primary w-100 text-center" href="javascript:void(0)">
-                  <i class="fa fa-fw fa-eye opacity-50 me-1"></i> View All
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- END Notifications Dropdown -->
-
-          <!-- Toggle Side Overlay -->
-          <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-          <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="side_overlay_toggle">
-            <i class="far fa-fw fa-list-alt"></i>
-          </button>
-          <!-- END Toggle Side Overlay -->
+          <!-- END Dropdown -->
         </div>
-        <!-- END Right Section -->
+        <!-- END User Dropdown -->
       </div>
-      <!-- END Header Content -->
+      <!-- END Right Section -->
+    </div>
+  </header>
+  <!-- END Page Header -->
 
-      <!-- Header Search -->
-      <div id="page-header-search" class="overlay-header bg-header-dark">
-        <div class="bg-white-10">
-          <div class="content-header">
-            <form class="w-100" action="be_pages_generic_search.html" method="POST">
-              <div class="input-group">
-                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                <button type="button" class="btn btn-alt-primary" data-toggle="layout" data-action="header_search_off">
-                  <i class="fa fa-fw fa-times-circle"></i>
-                </button>
-                <input type="text" class="form-control border-0" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
-              </div>
-            </form>
-          </div>
-        </div>
+  <!-- Page Content -->
+  <main id="page-content" class="flex flex-auto flex-col max-w-full pt-16">
+    <!-- Page Section -->
+    <router-outlet></router-outlet>
+    <div class="max-w-10xl mx-auto p-4 lg:p-8 w-full">
+      <!--
+
+      ADD YOUR MAIN CONTENT BELOW
+
+      -->
+
+      
+      <!-- Placeholder -->
+      <div class="flex items-center justify-center rounded-xl bg-gray-50 border-2 border-dashed border-gray-200 text-gray-400 py-64">Content (max width 1920px)</div>
+
+      
+      <!--
+
+      ADD YOUR MAIN CONTENT ABOVE
+
+      -->
+    </div>
+    <!-- END Page Section -->
+  </main>
+  <!-- END Page Content -->
+
+  <!-- Page Footer -->
+  <footer id="page-footer" class="flex flex-none items-center bg-white">
+    <div class="text-center flex flex-col md:text-left md:flex-row md:justify-between text-sm max-w-10xl mx-auto px-4 lg:px-8 w-full">
+      <div class="pt-4 pb-1 md:pb-4">
+        <a href="https://tailkit.com" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-400">Tailkit</a> ©
       </div>
-      <!-- END Header Search -->
-
-      <!-- Header Loader -->
-      <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
-      <div id="page-header-loader" class="overlay-header bg-header-dark">
-        <div class="bg-white-10">
-          <div class="content-header">
-            <div class="w-100 text-center">
-              <i class="fa fa-fw fa-sun fa-spin text-white"></i>
-            </div>
-          </div>
-        </div>
+      <div class="pb-4 pt-1 md:pt-4 inline-flex items-center justify-center">
+        <span>Crafted with</span>
+        <svg class="hi-solid hi-heart inline-block w-4 h-4 mx-1 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
+        <span>by <a href="https://pixelcave.com" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-400">pixelcave</a></span>
       </div>
-      <!-- END Header Loader -->
-    </header>
-    <!-- END Header -->
-
-    <!-- Main Container -->
-    <main id="main-container">
-        <router-outlet></router-outlet>
-    </main>
-    <!-- END Main Container -->
-
-    <!-- Footer -->
-    <footer id="page-footer" class="bg-body-light">
-      <div class="content py-0">
-        <div class="row fs-sm">
-          <div class="col-sm-6 order-sm-2 mb-1 mb-sm-0 text-center text-sm-end">
-            Crafted with <i class="fa fa-heart text-danger"></i> by <a class="fw-semibold" href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
-          </div>
-          <div class="col-sm-6 order-sm-1 text-center text-sm-start">
-            <a class="fw-semibold" href="https://1.envato.market/r6y" target="_blank">Dashmix 5.3</a> &copy; <span data-toggle="year-copy"></span>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- END Footer -->
-  </div>
-  <!-- END Page Container -->
+    </div>
+  </footer>
+  <!-- END Page Footer -->
+</div>
+<!-- END Page Container -->
