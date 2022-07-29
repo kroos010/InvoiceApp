@@ -3,3 +3,17 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer base {}
+
+
+input.ng-invalid.ng-touched {
+    @apply text-red-700 border-red-400 focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-50;
+}
+
+form.ng-submitted {
+    input.ng-invalid {
+        @apply text-red-700 border-red-400;
+        @apply focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-50;
+    }
+}

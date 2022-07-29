@@ -17,7 +17,7 @@ export const tokenGetter = () => {
   declarations: [
     AppComponent,
     AuthLayoutComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
   ],
   imports: [
     BrowserModule,

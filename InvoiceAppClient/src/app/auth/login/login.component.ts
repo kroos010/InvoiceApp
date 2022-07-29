@@ -60,6 +60,14 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
   }
 
+  public errorHandling = (control: string, error: string) => {
+    if ((this.submitted && this.loginForm.controls[control].invalid) || this.loginForm.controls[control].invalid && (this.loginForm.controls[control].dirty || this.loginForm.controls[control].touched)) {
+      return this.loginForm.controls[control].hasError(error);
+    }
+
+    return false;
+  }
+
   get loginFormControl() {
     return this.loginForm.controls;
   }
