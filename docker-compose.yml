@@ -1,19 +1,19 @@
 version: "3.9"
 services:
-  api:
-    build:
-      context: .
-      dockerfile: Docker/Dockerfile.Main
-    ports:
-      - "7178:7178"
-      - "5164:5000"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:7178;http://+:5164
-    volumes:
-      - .:/app
-    networks:
-      - mynetwork
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Docker/Dockerfile.Main
+  #   ports:
+  #     - "7178:7178"
+  #     - "5164:5000"
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=https://+:7178;http://+:5164
+  #   volumes:
+  #     - .:/app
+  #   networks:
+  #     - mynetwork
 
   frontend:
     build:

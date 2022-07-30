@@ -1,10 +1,24 @@
+using System.Security.Claims;
 using System.Text;
+using InvoiceApp.API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddIdentity<Account, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
+
+var connectionString = builder.Configuration.GetConnectionString("AppDb");
+builder.Services.AddDbContext<ApplicationContext>(x => x.UseNpgsql(connectionString));
+// builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddCors(options =>
 {
@@ -22,6 +36,7 @@ builder.Services.AddAuthentication(opt =>
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+    options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
