@@ -72,7 +72,7 @@ public class AuthController : ControllerBase
                 audience: "https://localhost:7178",
                 // claims: new List<Claim>(),
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMinutes(15),
                 signingCredentials: signingCredentials
             );
 

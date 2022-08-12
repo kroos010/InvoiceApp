@@ -16,10 +16,15 @@ const routes: Routes = [
       },
       {
         'path': '',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        'path': 'example',
+        loadChildren: () => import('./modules/example/example.module').then(m => m.ExampleModule)
       }
     ]
   },
+
   // Auth routes
   {
     path: '',
@@ -32,7 +37,7 @@ const routes: Routes = [
       },
       {
         'path': 'auth',
-        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+        loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
       }
     ]
   }

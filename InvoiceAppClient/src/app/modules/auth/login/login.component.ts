@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   //   // password: ''
   // });
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private authService: AuthService) {
     this.submitted = false;
     this.invalidLogin = false;
   }
@@ -41,21 +42,18 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const formResult = this.loginForm.value;
 
-    const credentials = {
+    const loginResult = this.authService.login({
       'username': formResult.name,
       'password': formResult.password
-    }
-
-    this.http.post("https://localhost:7178/api/auth/login", credentials).subscribe(response => {
-      const token = (<any>response).token;
-
-      localStorage.setItem("jwt", token);
-      this.invalidLogin = false;
-      this.router.navigate(["/"]);
-
-    }, error => {
-      this.invalidLogin = true;
-    })
+    }).subscribe({
+      next: (result) => {
+        this.invalidLogin = false;
+        this.router.navigate(["/"]);
+      },
+      error: (e) => {
+        this.invalidLogin = true;
+      },
+    });
 
     this.submitted = true;
   }

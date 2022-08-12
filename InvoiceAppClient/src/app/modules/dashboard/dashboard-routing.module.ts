@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../../core/guard/auth.guard';
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -15,15 +14,14 @@ const routes: Routes = [
       // },
     ],
   },
-  {
-    path: 'test',
-    component: HomeComponent
-  },
-
+  // {
+  //   path: 'test',
+  //   component: HomeComponent
+  // },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class DashboardRoutingModule { }

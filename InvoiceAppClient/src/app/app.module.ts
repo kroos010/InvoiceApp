@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 export const tokenGetter = () => {
   return localStorage.getItem("jwt");
@@ -32,10 +34,8 @@ export const tokenGetter = () => {
         disallowedRoutes: []
       }
     }),
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'X-XSRF-COOKIE',
-      headerName: 'X-XSRF-TOKEN',
-    }),
+    CoreModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
