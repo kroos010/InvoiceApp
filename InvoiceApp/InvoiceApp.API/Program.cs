@@ -50,6 +50,8 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
+// builder.Services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
