@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +31,10 @@ export const tokenGetter = () => {
         allowedDomains: ["localhost:7178"],
         disallowedRoutes: []
       }
+    }),
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'X-XSRF-COOKIE',
+      headerName: 'X-XSRF-TOKEN',
     }),
   ],
   providers: [],
