@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guard/auth.guard';
-import { CreateInvoiceComponent } from './pages/create-invoice/create-invoice.component';
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 
 const routes: Routes = [
   {

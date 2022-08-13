@@ -1,0 +1,60 @@
+<div class="relative flex flex-col rounded-md" (click)="onSearchingClicked($event)">
+    <button type="button" aria-expanded="false"
+        class="focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 w-full outline-none rounded-md">
+        <div
+            class="relative flex justify-center px-0 p-0 py-16 bg-white border border-gray-200 border-solid rounded-md min-h-[170px]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="h-5 w-5 flex justify-center !w-10 !h-10 p-2 mr-5 text-sm text-white bg-gray-200 rounded-full font-base">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            <div class="mt-1"><label class="text-lg font-medium text-gray-900">New Customer
+                    <span class="text-red-500">*</span>
+                </label>
+            </div>
+        </div>
+    </button>
+
+
+    <!-- Begin popover panel-->
+    <div *ngIf="onSearching" class="absolute min-w-full z-10">
+        <div id="headlessui-popover-panel-66"
+            class="overflow-hidden rounded-md shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
+            <div class="relative">
+                <div class="m-4 m-4 relative rounded-md shadow-sm font-base" placeholder="Search" icon="search">
+                    <input #search (click)="search.focus()" placeholder="Search" icon="search" type="text"
+                        class="font-base block w-full sm:text-sm border-gray-200 rounded-md text-black focus:ring-primary-400 focus:border-primary-400"
+                        tabindex="0">
+                    <!-- <label (click)="search.focus()">Search...</label> -->
+                </div>
+                <ul *ngFor="let customer of customers; let i = index"
+                    class="max-h-80 flex flex-col overflow-auto list border-t border-gray-200">
+                    <!-- <app-customer-search-list-item [selectedCustomer]="customer" (click)=""></app-customer-search-list-item> -->
+                    <li href="#" (click)="onSelectedCustomerClicked(customer)"
+                        class="flex px-6 py-2 border-b border-gray-200 border-solid cursor-pointer hover:cursor-pointer hover:bg-gray-100 focus:outline-none focus:bg-gray-100 last:border-b-0">
+                        <span
+                            class="flex items-center content-center justify-center w-10 h-10 mr-4 text-xl font-semibold leading-9 text-white bg-gray-300 rounded-full avatar">F</span>
+                        <div class="flex flex-col justify-center text-left">
+                            <div title="Fitter" class="m-0 text-base font-normal leading-tight cursor-pointer">
+                                {{ customer.companyName }}
+                            </div>
+                            <div title="fitterG" class="m-0 text-sm font-medium text-gray-400 cursor-pointer">
+                                {{ customer.Contactname }}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div><button type="button"
+                class="h-10 flex items-center justify-center w-full px-2 py-3 bg-gray-200 border-none outline-none focus:bg-gray-300"><svg
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-5 w-5 text-primary-400">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                    </path>
+                </svg><label class="m-0 ml-3 text-sm leading-none cursor-pointer font-base text-primary-400">Add
+                    New Customer</label></button>
+        </div>
+    </div>
+    <!-- End popover panel-->
+
+</div>

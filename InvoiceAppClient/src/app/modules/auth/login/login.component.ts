@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
@@ -13,19 +14,8 @@ export class LoginComponent implements OnInit {
 
   submitted: boolean;
   invalidLogin: boolean;
+  showLoading: boolean = false;
   loginForm!: FormGroup;
-
-
-  // this.loginForm = FormGroup({
-
-  //   name: new FormControl(this.loginForm.name, [
-  //     Validators.required,
-  //   ]),
-
-
-  //   // name: '',
-  //   // password: ''
-  // });
 
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private authService: AuthService) {
     this.submitted = false;
@@ -40,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showLoading = true;
     const formResult = this.loginForm.value;
 
     const loginResult = this.authService.login({
@@ -47,10 +38,12 @@ export class LoginComponent implements OnInit {
       'password': formResult.password
     }).subscribe({
       next: (result) => {
+        this.showLoading = false;
         this.invalidLogin = false;
-        this.router.navigate(["/"]);
+        this.router.navigate(["/"])
       },
       error: (e) => {
+        this.showLoading = false;
         this.invalidLogin = true;
       },
     });

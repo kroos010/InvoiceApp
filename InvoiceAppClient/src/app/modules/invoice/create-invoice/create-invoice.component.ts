@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateInvoiceComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  addCustomer(newItemEvent: any) {
+    console.log(newItemEvent);
   }
 
 }
