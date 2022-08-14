@@ -1,5 +1,5 @@
 <div class="relative flex flex-col rounded-md" (click)="onSearchingClicked($event)">
-    <button type="button" aria-expanded="false"
+    <button *ngIf="!this.selectedCustomer" type="button" aria-expanded="false"
         class="focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 w-full outline-none rounded-md">
         <div
             class="relative flex justify-center px-0 p-0 py-16 bg-white border border-gray-200 border-solid rounded-md min-h-[170px]">
@@ -8,6 +8,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
             </svg>
+
             <div class="mt-1"><label class="text-lg font-medium text-gray-900">New Customer
                     <span class="text-red-500">*</span>
                 </label>
@@ -15,19 +16,59 @@
         </div>
     </button>
 
+    <div *ngIf="this.selectedCustomer"
+        class="flex flex-col p-4 bg-white border border-gray-200 border-solid min-h-[170px] rounded-md">
+        <div class="flex relative justify-between mb-2">
+            <div title="Roberto Colon" class="flex-1 text-base font-medium text-left text-gray-900">Roberto Colon</div>
+            <div class="flex">
+                <a class="relative my-0 ml-6 text-sm font-medium cursor-pointer text-primary-500 items-center flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-5 w-5 text-gray-500 h-4 w-4 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                        </path>
+                    </svg> Edit</a>
+                <a (click)="onDeselect()"
+                    class="relative my-0 ml-6 text-sm flex items-center font-medium cursor-pointer text-primary-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-5 w-5 text-gray-500 h-4 w-4 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg> Deselect</a>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-8 mt-2">
+            <div class="flex flex-col"><label
+                    class="mb-1 text-sm font-medium text-left text-gray-400 uppercase whitespace-nowrap">Bill to</label>
+                <div class="flex flex-col flex-1 p-0 text-left"><label class="relative w-11/12 text-sm truncate">Roberto
+                        Colon</label><label class="relative w-11/12 text-sm truncate"><span>Ponce</span><span> ,
+                        </span><span>PR</span></label><label class="relative w-11/12 text-sm truncate">00730</label>
+                </div>
+            </div>
+            <div class="flex flex-col"><label
+                    class="mb-1 text-sm font-medium text-left text-gray-400 uppercase whitespace-nowrap">Ship to</label>
+                <div class="flex flex-col flex-1 p-0 text-left"><label class="relative w-11/12 text-sm truncate">Roberto
+                        Colon</label><label class="relative w-11/12 text-sm truncate"><span>Ponce</span><span> ,
+                        </span><span>PR</span></label><label class="relative w-11/12 text-sm truncate">00730</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Begin popover panel-->
-    <div *ngIf="onSearching" class="absolute min-w-full z-10">
+    <div *ngIf="onSearching && !selectedCustomer" class="absolute min-w-full z-10">
         <div id="headlessui-popover-panel-66"
             class="overflow-hidden rounded-md shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
             <div class="relative">
                 <div class="m-4 m-4 relative rounded-md shadow-sm font-base" placeholder="Search" icon="search">
-                    <input #search (click)="search.focus()" placeholder="Search" icon="search" type="text"
+                    <input #search (click)="search.focus()" [(ngModel)]="query" placeholder="Search" icon="search"
+                        type="text"
                         class="font-base block w-full sm:text-sm border-gray-200 rounded-md text-black focus:ring-primary-400 focus:border-primary-400"
                         tabindex="0">
                     <!-- <label (click)="search.focus()">Search...</label> -->
                 </div>
-                <ul *ngFor="let customer of customers; let i = index"
+                <ul *ngFor="let customer of customers | searchFilter: query; let i = index;"
                     class="max-h-80 flex flex-col overflow-auto list border-t border-gray-200">
                     <!-- <app-customer-search-list-item [selectedCustomer]="customer" (click)=""></app-customer-search-list-item> -->
                     <li href="#" (click)="onSelectedCustomerClicked(customer)"
@@ -36,10 +77,10 @@
                             class="flex items-center content-center justify-center w-10 h-10 mr-4 text-xl font-semibold leading-9 text-white bg-gray-300 rounded-full avatar">F</span>
                         <div class="flex flex-col justify-center text-left">
                             <div title="Fitter" class="m-0 text-base font-normal leading-tight cursor-pointer">
-                                {{ customer.companyName }}
+                                {{ customer.CompanyName }}
                             </div>
                             <div title="fitterG" class="m-0 text-sm font-medium text-gray-400 cursor-pointer">
-                                {{ customer.Contactname }}
+                                {{ customer.FirstName }} {{ customer.LastName }}
                             </div>
                         </div>
                     </li>

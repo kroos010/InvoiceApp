@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CustomerInvoiceSearchPipe } from './pipes/customer-invoice-search.pipe';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 
 
 @NgModule({
   declarations: [
-    CustomerInvoiceSearchPipe
+    SearchFilterPipe
   ],
   imports: [
     CommonModule,
@@ -20,6 +20,7 @@ import { CustomerInvoiceSearchPipe } from './pipes/customer-invoice-search.pipe'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SearchFilterPipe
   ]
 })
 export class SharedModule { }

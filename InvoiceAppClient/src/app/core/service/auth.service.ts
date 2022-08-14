@@ -17,8 +17,7 @@ export class AuthService {
   login(credentials: credentials): Observable<any> {
 
     return this.http.post("https://localhost:7178/api/auth/login", credentials).pipe(
-      switchMap((response: any) => {
-        debugger;
+      map((response: any) => {
 
         const token = (<any>response).token;
         localStorage.setItem("jwt", token);
