@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using InvoiceApp.API.Data;
 using InvoiceApp.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -33,7 +34,7 @@ public class AuthController : ControllerBase
     [HttpPost, Route("Login")]
     public async Task<IActionResult> Login([FromBody] LoginModel user)
     {
-        if (user == null)
+        if (user == null || !ModelState.IsValid)
         {
             return BadRequest("Invalid client request");
         }
@@ -66,6 +67,7 @@ public class AuthController : ControllerBase
                         new Claim("Claim", "Value")
             };
 
+            DateTime tokenExpiration = DateTime.Now.AddMinutes(15);
 
             var tokenOptions = new JwtSecurityToken(
                 issuer: "https://localhost:7178",
@@ -77,7 +79,8 @@ public class AuthController : ControllerBase
             );
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return Ok(new { Token = tokenString });
+            // return Ok(new { Token = tokenString });
+            return Ok(new { Token = tokenString, TokenExpiration = tokenExpiration });
         }
 
         // if (user.UserName == "johndoe" && user.Password == "1234")
@@ -124,5 +127,71 @@ public class AuthController : ControllerBase
         }
 
         return StatusCode(201);
+    }
+
+    public class TokenModel
+    {
+        public string? AccessToken { get; set; }
+        public string? RefreshToken { get; set; }
+    }
+
+    private ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
+    {
+        var tokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false,
+            ValidateIssuer = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("stringhier")),
+            ValidateLifetime = false
+        };
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+        if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            throw new SecurityTokenException("Invalid token");
+
+        return principal;
+
+    }
+
+    [Authorize]
+    [HttpPost, Route("RefreshToken")]
+    public async Task<IActionResult> RefreshToken()
+    {
+        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("VerySecretKey123!"));
+        var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+        var userId = HttpContext.GetUserId();
+        var userd = await _userManager.FindByIdAsync(userId);
+
+        var id = userd.Id;
+        var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userd.Id),
+                new Claim(ClaimTypes.NameIdentifier, userd.Id),
+                new Claim(ClaimTypes.Name, userd.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat,
+                        DateTime.UtcNow.ToString(),
+                        ClaimValueTypes.Integer64),
+                        new Claim("Claim", "Value")
+            };
+
+        DateTime tokenExpiration = DateTime.Now.AddMinutes(15);
+
+        var tokenOptions = new JwtSecurityToken(
+            issuer: "https://localhost:7178",
+            audience: "https://localhost:7178",
+            // claims: new List<Claim>(),
+            claims: claims,
+            expires: DateTime.Now.AddMinutes(15),
+            signingCredentials: signingCredentials
+        );
+
+
+        var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        // return Ok(new { Token = tokenString });
+        return Ok(new { Token = tokenString, TokenExpiration = tokenExpiration });
     }
 }

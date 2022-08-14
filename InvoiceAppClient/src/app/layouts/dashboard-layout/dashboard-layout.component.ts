@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { interval, startWith, Subscription, switchMap, tap } from 'rxjs';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { AuthenticationTokenManagerService } from 'src/app/core/service/authentication-token-manager.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -7,19 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardLayoutComponent implements OnInit {
 
-  constructor() { }
+  // timeInterval: Subscription
+
+  constructor(private authenticationTokenManagerService: AuthenticationTokenManagerService) {
+
+    this.authenticationTokenManagerService.isTokenAlmostExpired().subscribe((response: unknown) => {
+      this.inactiveAlert = true
+    })
+  }
 
   showMenuNavbar = false;
   showHeaderProfileDropdown = false;
+  inactiveAlert = false;
 
   ngOnInit(): void {
+
   }
 
-  toggleNavbar(){
+  toggleNavbar() {
     this.showMenuNavbar = !this.showMenuNavbar;
   }
 
-  toggleHeaderProfileDropdown(){
+  toggleHeaderProfileDropdown() {
     this.showHeaderProfileDropdown = !this.showHeaderProfileDropdown;
   }
 
