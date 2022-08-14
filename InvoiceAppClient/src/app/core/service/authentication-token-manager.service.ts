@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { interval, Observable, startWith, Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 
+export type TokenExpirationStatus = {
+  almostExpired: boolean,
+  completelyExpired: boolean,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +15,15 @@ export class AuthenticationTokenManagerService {
 
   constructor(private authService: AuthService) { }
 
-  isTokenAlmostExpired(): Observable<boolean> {
+  // Todo: Seperate in other methods...
+  isTokenAlmostExpired(): Observable<TokenExpirationStatus> {
 
-    const isExpired = new Observable<boolean>((observer) => {
+    const isExpired = new Observable<TokenExpirationStatus>((observer) => {
+
+      const status: TokenExpirationStatus = {
+        almostExpired: false,
+        completelyExpired: false
+      }
 
       const timeInterval: Subscription = interval(5000).pipe(startWith(0)).subscribe((_) => {
         const currentDate = new Date()
@@ -23,8 +34,13 @@ export class AuthenticationTokenManagerService {
         // console.log('currentDate', currentDate)
         // console.log('msBetweenDates', msBetweenDates)
 
+        if (msBetweenDates <= 0) {
+          status.completelyExpired = true
+          observer.next(status)
+        }
         if (msBetweenDates < 5) {
-          observer.next(true)
+          status.almostExpired = true
+          observer.next(status)
         }
         return {
           unsubscribe() {
