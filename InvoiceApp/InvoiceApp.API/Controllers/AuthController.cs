@@ -74,7 +74,7 @@ public class AuthController : ControllerBase
                 audience: "https://localhost:7178",
                 // claims: new List<Claim>(),
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(15),
+                expires: tokenExpiration,
                 signingCredentials: signingCredentials
             );
 
@@ -185,7 +185,7 @@ public class AuthController : ControllerBase
             audience: "https://localhost:7178",
             // claims: new List<Claim>(),
             claims: claims,
-            expires: DateTime.Now.AddMinutes(15),
+            expires: tokenExpiration,
             signingCredentials: signingCredentials
         );
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.http.get("https://localhost:7178/weatherforecast").subscribe(response => {
       console.log(response)
     }, error => {

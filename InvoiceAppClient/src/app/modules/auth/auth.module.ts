@@ -22,6 +22,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
   ],
   exports: [
+    AuthRoutingModule
   ]
 })
 export class AuthModule { }

@@ -7,6 +7,7 @@ import { SalesComponent } from './components/sales/sales.component';
 import { EarningsComponent } from './components/earnings/earnings.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { OpenInvoicesComponent } from './components/open-invoices/open-invoices.component';
+import { AuthModule } from '../auth/auth.module';
 
 
 @NgModule({
