@@ -22,11 +22,14 @@ export class AuthService {
 
   login(credentials: credentials): Observable<any> {
 
-    return this.http.post<LoginResponse>("https://localhost:7178/api/auth/login", credentials).pipe(
+    return this.http.post<any>("https://localhost:7248/api/auth/authenticate", credentials).pipe(
       tap((response) => {
+        const token = response.result.token;
 
-        const token = response.token;
-        const tokenExpiration = response.tokenExpiration;
+        // const tokenExpiration = response.result.tokenExpiration;
+        let tokenExpiration = new Date();
+        tokenExpiration.setDate(tokenExpiration.getDate() + 7);
+
 
         localStorage.setItem("jwt", token);
         localStorage.setItem("jwt_expiration", tokenExpiration.toString());

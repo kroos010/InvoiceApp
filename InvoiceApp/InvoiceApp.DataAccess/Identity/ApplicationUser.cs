@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace InvoiceApp.API.Data;
+namespace InvoiceApp.DataAccess.Identity;
 
-public class Account : IdentityUser
+public class ApplicationUser : IdentityUser
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

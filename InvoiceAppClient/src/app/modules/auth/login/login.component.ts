@@ -38,11 +38,13 @@ export class LoginComponent implements OnInit {
       'password': formResult.password
     }).subscribe({
       next: (result) => {
+        console.log('Component result:', result)
         this.showLoading = false;
         this.invalidLogin = false;
         this.router.navigate(["/"])
       },
       error: (e) => {
+        console.log('Component error:', JSON.stringify(e))
         this.showLoading = false;
         this.invalidLogin = true;
       },

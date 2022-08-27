@@ -30,7 +30,7 @@ export const tokenGetter = () => {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:7178"],
+        allowedDomains: ["localhost:7248"],
         disallowedRoutes: []
       }
     }),

@@ -1,61 +1,21 @@
-using System.Security.Claims;
-using System.Text;
-using InvoiceApp.API.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using InvoiceApp.API;
+using InvoiceApp.Application;
+using InvoiceApp.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
+IWebHostEnvironment environment = builder.Environment;
+
 // Add services to the container.
-
-builder.Services.AddIdentity<Account, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationContext>();
-
-builder.Services.Configure<IdentityOptions>(options =>
-options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
-
-var connectionString = builder.Configuration.GetConnectionString("AppDb");
-builder.Services.AddDbContext<ApplicationContext>(x => x.UseNpgsql(connectionString));
-// builder.Services.AddAutoMapper(typeof(Program));
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("EnableCORS", builder =>
-    {
-        builder.AllowAnyOrigin()
-        .AllowAnyHeader()
-        .AllowAnyMethod();
-    });
-});
-
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-
-        ValidIssuer = "https://localhost:7178",
-        ValidAudience = "https://localhost:7178",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("VerySecretKey123!"))
-    };
-});
-
-// builder.Services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDataAccess(configuration).AddApplication(environment);
+builder.Services.AddJwt(configuration);
 
 var app = builder.Build();
 
@@ -66,13 +26,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(corsPolicyBuilder =>
+    corsPolicyBuilder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+);
+
 app.UseHttpsRedirection();
 
-app.UseCors("EnableCORS");
-
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.Run();

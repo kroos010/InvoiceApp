@@ -1,6 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.API", "InvoiceApp.API\InvoiceApp.API.csproj", "{D779F472-3F09-40A8-A48C-C1CCE7E5D87F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.API", "InvoiceApp.API\InvoiceApp.API.csproj", "{6585D3BD-CCD3-4FCE-A035-E53DA2E3E61E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.Application", "InvoiceApp.Application\InvoiceApp.Application.csproj", "{88DAB932-5C3F-4540-9E07-B59E1AA7E99A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.Core", "InvoiceApp.Core\InvoiceApp.Core.csproj", "{B2CD63FC-0041-46B8-A346-32F11A5DDEC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.DataAccess", "InvoiceApp.DataAccess\InvoiceApp.DataAccess.csproj", "{F0B35376-40B8-4FF2-91AC-E69EB3BCBFEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.Shared", "InvoiceApp.Shared\InvoiceApp.Shared.csproj", "{63EF46A9-226D-4446-8894-5E7799EBFB87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +16,25 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D779F472-3F09-40A8-A48C-C1CCE7E5D87F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D779F472-3F09-40A8-A48C-C1CCE7E5D87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D779F472-3F09-40A8-A48C-C1CCE7E5D87F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D779F472-3F09-40A8-A48C-C1CCE7E5D87F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6585D3BD-CCD3-4FCE-A035-E53DA2E3E61E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6585D3BD-CCD3-4FCE-A035-E53DA2E3E61E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6585D3BD-CCD3-4FCE-A035-E53DA2E3E61E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6585D3BD-CCD3-4FCE-A035-E53DA2E3E61E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88DAB932-5C3F-4540-9E07-B59E1AA7E99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88DAB932-5C3F-4540-9E07-B59E1AA7E99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88DAB932-5C3F-4540-9E07-B59E1AA7E99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88DAB932-5C3F-4540-9E07-B59E1AA7E99A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2CD63FC-0041-46B8-A346-32F11A5DDEC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2CD63FC-0041-46B8-A346-32F11A5DDEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2CD63FC-0041-46B8-A346-32F11A5DDEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2CD63FC-0041-46B8-A346-32F11A5DDEC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0B35376-40B8-4FF2-91AC-E69EB3BCBFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0B35376-40B8-4FF2-91AC-E69EB3BCBFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0B35376-40B8-4FF2-91AC-E69EB3BCBFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0B35376-40B8-4FF2-91AC-E69EB3BCBFEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EF46A9-226D-4446-8894-5E7799EBFB87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EF46A9-226D-4446-8894-5E7799EBFB87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EF46A9-226D-4446-8894-5E7799EBFB87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EF46A9-226D-4446-8894-5E7799EBFB87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

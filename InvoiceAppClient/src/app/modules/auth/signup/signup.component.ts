@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
       'password': formResult.password
     }
 
-    this.http.post("https://localhost:7178/api/auth/register", credentials).subscribe(response => {
+    this.http.post("https://localhost:7248/api/auth/signup", credentials).subscribe(response => {
       this.submitted = true;
       this.router.navigate(["/"])
     }, error => {

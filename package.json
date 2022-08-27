@@ -1,0 +1,23 @@
+{
+  "name": "invoiceapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dotnet-watch": "dotnet watch --project ./InvoiceApp/InvoiceApp.API/InvoiceApp.API.csproj run",
+    "db-add-migration": "dotnet ef --startup-project ./InvoiceApp/InvoiceApp.API/InvoiceApp.API.csproj migrations add $NAME --context ApplicationContext --output-dir Persistence/Migrations --project ./InvoiceApp/InvoiceApp.DataAccess/InvoiceApp.DataAccess.csproj",
+    "db-migrate": "dotnet ef --startup-project ./InvoiceApp/InvoiceApp.API/InvoiceApp.API.csproj database update --project ./InvoiceApp/InvoiceApp.DataAccess/InvoiceApp.DataAccess.csproj"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kroos010/InvoiceApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kroos010/InvoiceApp/issues"
+  },
+  "homepage": "https://github.com/kroos010/InvoiceApp#readme"
+}
