@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, map, Observable, switchMap, tap } from 'rxjs';
 import { AuthenticationToken } from 'src/app/data/schema/AuthenticationToken';
+import { environment } from 'src/environments/environment';
+import { ApiResult } from '../ApiResult';
 
 type credentials = {
   'username': string,
@@ -9,8 +11,10 @@ type credentials = {
 }
 
 type LoginResponse = {
+  username: string,
+  email: string,
   token: string,
-  tokenExpiration: Date
+  // tokenExpiration: Date
 }
 
 @Injectable({
@@ -22,7 +26,7 @@ export class AuthService {
 
   login(credentials: credentials): Observable<any> {
 
-    return this.http.post<any>("https://localhost:7248/api/auth/authenticate", credentials).pipe(
+    return this.http.post<ApiResult<LoginResponse>>(`${environment.BASE_API_URL}/auth/authenticate`, credentials).pipe(
       tap((response) => {
         const token = response.result.token;
 
@@ -41,7 +45,7 @@ export class AuthService {
 
   renewToken(): Observable<any> {
 
-    return this.http.post<AuthenticationToken>("https://localhost:7178/api/auth/RefreshToken", {}).pipe(
+    return this.http.post<AuthenticationToken>(`${environment.BASE_API_URL}/auth/RefreshToken`, {}).pipe(
       tap((response) => {
 
         const token: AuthenticationToken = {

@@ -1,6 +1,9 @@
+using FluentValidation;
 using InvoiceApp.Application.MappingProfiles;
+using InvoiceApp.Application.Models.User;
 using InvoiceApp.Application.Services;
 using InvoiceApp.Application.Services.Contracts;
+using InvoiceApp.Application.Validators.User;
 using InvoiceApp.DataAccess.UnitOfWork;
 using InvoiceApp.DataAccess.UnitOfWork.Contracts;
 using InvoiceApp.Shared.Services;
@@ -19,6 +22,8 @@ public static class ApplicationDependencyInjection
         services.AddServices(env);
 
         services.RegisterAutoMapper();
+
+        services.AddValidationServices(env);
 
         return services;
     }
@@ -43,6 +48,11 @@ public static class ApplicationDependencyInjection
     private static void RegisterAutoMapper(this IServiceCollection services)
     {
         services.AddAutoMapper(typeof(IMappingProfilesMarker));
+    }
+
+    private static void AddValidationServices(this IServiceCollection services, IWebHostEnvironment env)
+    {
+        services.AddScoped<IValidator<CreateUserModel>, CreateUserModelValidator>();
     }
 
     public static void AddEmailConfiguration(this IServiceCollection services, IConfiguration configuration)

@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiResult } from 'src/app/core/ApiResult';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -38,13 +40,17 @@ export class SignupComponent implements OnInit {
       'password': formResult.password
     }
 
-    this.http.post("https://localhost:7248/api/auth/signup", credentials).subscribe(response => {
+    this.http.post(`${environment.BASE_API_URL}/auth/signup`, credentials).subscribe(response => {
       this.submitted = true;
       this.router.navigate(["/"])
-    }, error => {
-      if (error.error.some((e: any) => e.code === 'DuplicateUserName')) {
+    }, (httpError: HttpErrorResponse) => {
+      if (httpError.error.errors['DuplicateUserName'] != undefined) {
         this.signupForm.controls['email'].setErrors({ 'DuplicateUserName': true });
       }
+
+      // if (error.error.some((e: any) => e.code === 'DuplicateUserName')) {
+      //   this.signupForm.controls['email'].setErrors({ 'DuplicateUserName': true });
+      // }
       this.submitted = true;
     });
   }
