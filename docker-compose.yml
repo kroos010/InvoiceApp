@@ -51,6 +51,23 @@ services:
       mynetwork:
 
 
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    depends_on:
+      - db
+    links:
+      - db:db
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=server@myapp.de
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    networks:
+      mynetwork:
+    logging:
+      driver: none
+
 networks:
   mynetwork:
     driver: bridge
