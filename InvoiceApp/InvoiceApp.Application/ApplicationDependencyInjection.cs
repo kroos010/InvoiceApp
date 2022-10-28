@@ -1,8 +1,10 @@
 using FluentValidation;
 using InvoiceApp.Application.MappingProfiles;
+using InvoiceApp.Application.Models.Debtor;
 using InvoiceApp.Application.Models.User;
 using InvoiceApp.Application.Services;
 using InvoiceApp.Application.Services.Contracts;
+using InvoiceApp.Application.Validators.Debtor;
 using InvoiceApp.Application.Validators.User;
 using InvoiceApp.DataAccess.UnitOfWork;
 using InvoiceApp.DataAccess.UnitOfWork.Contracts;
@@ -36,6 +38,8 @@ public static class ApplicationDependencyInjection
         // services.AddScoped<ITodoListService, TodoListService>();
         // services.AddScoped<ITodoItemService, TodoItemService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IDebtorService, DebtorService>();
+        
         services.AddScoped<IClaimService, ClaimService>();
         // services.AddScoped<ITemplateService, TemplateService>();
 
@@ -53,6 +57,9 @@ public static class ApplicationDependencyInjection
     private static void AddValidationServices(this IServiceCollection services, IWebHostEnvironment env)
     {
         services.AddScoped<IValidator<CreateUserModel>, CreateUserModelValidator>();
+        
+        services.AddScoped<IValidator<CreateDebtorModel>, CreateDebtorModelValidator>();
+        services.AddScoped<IValidator<UpdateDebtorModel>, UpdateDebtorModelValidator>();
     }
 
     public static void AddEmailConfiguration(this IServiceCollection services, IConfiguration configuration)

@@ -1,5 +1,7 @@
 using InvoiceApp.DataAccess.Identity;
 using InvoiceApp.DataAccess.Persistence;
+using InvoiceApp.DataAccess.Repositories;
+using InvoiceApp.DataAccess.Repositories.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +25,7 @@ public static IServiceCollection AddDataAccess(this IServiceCollection services,
 
     private static void AddRepositories(this IServiceCollection services)
     {
-        // services.AddScoped<ITodoItemRepository, TodoItemRepository>();
+        services.AddScoped<IDebtorRepository, DebtorRepository>();
         // services.AddScoped<ITodoListRepository, TodoListRepository>();
     }
 

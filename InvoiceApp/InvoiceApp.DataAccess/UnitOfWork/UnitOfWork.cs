@@ -1,4 +1,5 @@
 using InvoiceApp.DataAccess.Persistence;
+using InvoiceApp.DataAccess.Repositories;
 using InvoiceApp.DataAccess.Repositories.Contracts;
 using InvoiceApp.DataAccess.UnitOfWork.Contracts;
 
@@ -15,7 +16,7 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(ApplicationContext context)
     {
         _context = context;
-        // Debtors = new DebtorRepository(_context);
+        Debtors = new DebtorRepository(_context);
     }
 
     public int Complete()
