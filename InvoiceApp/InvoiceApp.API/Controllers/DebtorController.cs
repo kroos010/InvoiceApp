@@ -1,3 +1,5 @@
+using AutoWrapper.Extensions;
+using AutoWrapper.Wrappers;
 using FluentValidation;
 using FluentValidation.Results;
 using InvoiceApp.Application.Models;
@@ -11,6 +13,7 @@ namespace InvoiceApp.API.Controllers;
 
 [ApiController]
 [Route("api/debtor")]
+[AllowAnonymous]
 public class DebtorController : ControllerBase
 {
     private readonly IValidator<CreateDebtorModel> _createDebtorValidator;
@@ -26,70 +29,59 @@ public class DebtorController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetAllDebtors()
+    public async Task<IActionResult> GetAllDebtors()
     {
-        var test = await _debtorService.GetAllAsync();
-        return Ok(ApiResult<IEnumerable<DebtorResponseModel>>.Success(await _debtorService.GetAllAsync()));
+        var debtors = await _debtorService.GetAllAsync();
+        
+        return Ok(debtors);
     }
     
     [HttpGet("{id}")]
-    public async Task<ActionResult> GetAllDebtors(Guid id)
+    public async Task<IActionResult> GetDebtorById(Guid id)
     {
         DebtorResponseModel debtor = await _debtorService.GetByIdAsync(id);
-
         if (debtor == null)
         {
-            return NotFound(ApiResult<DebtorResponseModel>.Failure("Resource not found"));
+            return NotFound($"Debtor with id: {id} does not exist.");
         }
         
-        return Ok(ApiResult<DebtorResponseModel>.Success(debtor));
+        return Ok(debtor);
     }
 
     [HttpPost]
-    [AllowAnonymous]
-    [ProducesResponseType(typeof(ApiResult<CreateDebtorResponseModel>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> Create(CreateDebtorModel createDebtorModel)
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> CreateDebtor(CreateDebtorModel createDebtorModel)
     {
-        ValidationResult result = await _createDebtorValidator.ValidateAsync(createDebtorModel);
-        if (!result.IsValid)
+        if (!ModelState.IsValid)
         {
-            foreach (var item in result.Errors)
-            {
-                this.ModelState.AddModelError(item.ErrorCode, item.ErrorMessage);
-            }
+            return BadRequest();
         }
         
-        // Todo: Update to created at action
-        return Ok(ApiResult<CreateDebtorResponseModel>.Success(await _debtorService.CreateAsync(createDebtorModel)));
+        var createdDebtor = await _debtorService.CreateAsync(createDebtorModel);
+        
+        return CreatedAtAction(nameof(GetAllDebtors),
+            new { id = createdDebtor.Id }, createdDebtor);
     }
     
     [HttpPut]
-    [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> UpdateAsync(Guid id, [FromBody]UpdateDebtorModel updateDebtorModel)
+    public async Task<IActionResult> UpdateDebtor(Guid id, [FromBody]UpdateDebtorModel updateDebtorModel)
     {
-        ValidationResult result = await _updateDebtorValidator.ValidateAsync(updateDebtorModel);
-        if (!result.IsValid)
-        {
-            foreach (var item in result.Errors)
-            {
-                this.ModelState.AddModelError(item.ErrorCode, item.ErrorMessage);
-            }
-        }
-
         await _debtorService.UpdateAsync(id, updateDebtorModel);
         
         return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(Guid id)
+    public async Task<IActionResult> DeleteDebtor(Guid id)
     {
         if (_debtorService.GetByIdAsync(id) == null)
         {
             return NotFound();
         }
-        
-        return NotFound();
+
+        await _debtorService.DeleteAsync(id);
+
+        return new NoContentResult();
     }
 }

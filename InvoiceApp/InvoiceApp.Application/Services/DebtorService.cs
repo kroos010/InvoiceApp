@@ -26,14 +26,13 @@ public class DebtorService : IDebtorService
         return debtorsResponse;
     }
     
-    public async Task<DebtorResponseModel> GetByIdAsync(Guid id)
+    public async Task<DebtorResponseModel>? GetByIdAsync(Guid id)
     {
         Debtor debtor = await _unitOfWork.Debtors.GetByIdAsync(id);
-        
-        if (debtor == null)
-        {
-            throw new NotFoundException("Not found");
-        }
+        // if (debtor == null)
+        // {
+            // throw new NotFoundException("Not found");
+        // }
         
         DebtorResponseModel debtorResponse = _mapper.Map<DebtorResponseModel>(debtor);
 
@@ -74,6 +73,8 @@ public class DebtorService : IDebtorService
     public async Task DeleteAsync(Guid debtorId)
     {
         var debtor = await _unitOfWork.Debtors.GetByIdAsync(debtorId);
+        
         _unitOfWork.Debtors.DeleteAsync(debtor);
+        _unitOfWork.Complete();
     }
 }
